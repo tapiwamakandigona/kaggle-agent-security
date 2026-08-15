@@ -38,3 +38,14 @@
   not deterministic. attack.py = Go-Explore + laundering-seed library exploiting
   the 3 guardrail blind spots. Local dev vs deterministic for robustness; breach
   yield validated in Kaggle notebook (has GPU + model). Blocker flagged in STRATEGY.
+
+## 2026-08-15 (iter-279) — attack.py written + K4 passed
+- Wrote submission/attack.py: budget-safe Go-Explore + taint-laundering seed library
+  (Phase 1 crafted untrusted->launder>=5->payload chains; Phase 2 archive search).
+  Agent-agnostic; hard Timebox in every loop; always returns >=1 candidate.
+- Validate: PASS. Direct budget test: 19.1s vs 20s budget, no overrun (baseline overran).
+- Official CLI evaluate (deterministic, 25s): accepted, full scorer ran, score 0.00
+  (findings_count 0) — expected: deterministic agent is immune (proven). report.json
+  shows guardrail optimal_public, seed 123, normalized scoring, diversity = unique_cells.
+- K4 PASS. attack.py mirrored to repo root for Kaggle. Next: notebook packaging (K6)
+  needs Kaggle GPU+gpt-oss to get real breaches (blocker already flagged).

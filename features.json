@@ -22,8 +22,8 @@
     {
       "id": "K4",
       "desc": "attack.py runs budget-safe vs deterministic agent (no crash/overrun); >=1 candidate emitted",
-      "passes": false,
-      "evidence": ""
+      "passes": true,
+      "evidence": "attack.py: official CLI evaluate accepted it, ran full scorer pipeline (report.json, guardrail optimal_public, seed123), 19.1s<=20s budget no overrun, >=1 candidate; score 0 vs immune deterministic agent as predicted, 2026-08-15"
     },
     {
       "id": "K5",
