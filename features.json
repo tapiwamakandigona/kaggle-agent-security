@@ -21,13 +21,13 @@
     },
     {
       "id": "K4",
-      "desc": "Minimal attack.py runs in-env and returns >=1 valid candidate",
+      "desc": "attack.py runs budget-safe vs deterministic agent (no crash/overrun); >=1 candidate emitted",
       "passes": false,
       "evidence": ""
     },
     {
       "id": "K5",
-      "desc": "Archive/novelty search finds candidates across >=3 predicate families",
+      "desc": "Go-Explore + laundering-seed search; verified breaches vs LLM target in Kaggle notebook across >=3 families",
       "passes": false,
       "evidence": ""
     },

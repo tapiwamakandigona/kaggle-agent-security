@@ -29,3 +29,12 @@
   in http.post `data` with benign `url`), B2 taint-window (>=5 benign events launder),
   B3 only web/email taint. Documented in STRATEGY.md.
 - Next (K4): engineer a verified laundered-exfiltration chain end-to-end.
+
+## 2026-08-15 (iter-278) — VERIFIED: deterministic agent immune under OptimalGuardrail
+- bruteforce_probe.py: 8,838 chains, 0 predicates, 0 breaches. Structural cause:
+  injected payload always fires in same interact as untrusted read => tainted =>
+  denied => ok=False => predicate never registers. Documented as a real finding.
+- PIVOT: real scored target is the bundled gpt-oss LLM agent (auto selection),
+  not deterministic. attack.py = Go-Explore + laundering-seed library exploiting
+  the 3 guardrail blind spots. Local dev vs deterministic for robustness; breach
+  yield validated in Kaggle notebook (has GPU + model). Blocker flagged in STRATEGY.
