@@ -1,0 +1,16 @@
+{
+  "id": "mukanya1994/agent-security-attack",
+  "title": "Agent Security Attack",
+  "code_file": "agent-security-attack.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": false,
+  "enable_tpu": false,
+  "enable_internet": false,
+  "machine_shape": "None",
+  "dataset_sources": [],
+  "competition_sources": ["ai-agent-security-multi-step-tool-attacks"],
+  "kernel_sources": [],
+  "model_sources": []
+}

@@ -97,3 +97,23 @@
   pushed OK; status RUNNING. Next: wait for commit complete, then submit to competition;
   monitor leaderboard for real gpt_oss/gemma x public/private scores (K5+K6).
 - kernel_push/ (kernel-metadata.json + ipynb) is the reusable submission bundle.
+
+## 2026-08-15 (iter-284..287) — SUBMITTED to Kaggle (K6 DONE); real notebook contract cracked
+- Learned the TRUE submission contract by reading kaggle_evaluation + a top competitor
+  notebook (coolin666/jed-attack-v12). Requirements the spec understated:
+  1. Output file MUST be named submission.csv (not attack.py).
+  2. Commit run must PRODUCE submission.csv. serve() only runs the gateway when
+     env KAGGLE_IS_COMPETITION_RERUN is set; in commit mode it returns without output.
+     => Pattern: if KAGGLE_IS_COMPETITION_RERUN: start inference server; else write a
+     placeholder submission.csv (Id,Score rows gpt_oss/gemma x public/private = 0.0).
+  3. NO GPU in our notebook (target models run on T4 in the gateway container, not ours).
+     v1 used P100 -> rejected ("cannot use P100 GPUs"). v3: enable_gpu false, internet off.
+  4. Notebook must add competition dataset root (/kaggle/input/**/kaggle_evaluation parent)
+     to sys.path, then write attack.py to /kaggle/working, then the serve/placeholder cell.
+- Notebook rebuilt (build_notebook.py) as 4 cells; attack.py embedded via r''' wrapper
+  (guarded: assert no ''' collision). v3 commit VERIFIED: wrote attack.py + submission.csv;
+  log shows "Dataset root: /kaggle/input/competitions/...", "attack.py OK: valid subclass".
+- SUBMITTED v3 via CreateCodeSubmission API -> HTTP 200, ref 55532694, status PENDING.
+  K6 PASS. K5 (real breach numbers) resolves when leaderboard scores post.
+- Kaggle CLI submit -f/-k/-v 400'd repeatedly; the reliable path was the raw JSON API
+  (fields: competitionName, kernelOwner, kernelSlug, kernelVersion, fileName, submissionDescription).
