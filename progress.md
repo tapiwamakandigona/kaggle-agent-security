@@ -200,3 +200,11 @@
   'openai/gpt-oss-20b'" (needs model weights + GPU, absent here). gemma same class. The only
   locally-runnable agent is the deterministic one, which is PROVEN immune. => v4's real score can
   ONLY come from Kaggle's rerun. Correct action = WAIT, do not fabricate variants.
+
+## 2026-08-15 ~22:32 UTC — v4 still PENDING (now overdue vs v3); 2h backstop set, stop hand-polling
+- v4 (55532857) still PENDING ~5h after submit; v3 (submitted 9 min earlier) already COMPLETE=0.000.
+  v4 now slightly OVERDUE relative to v3's ~5h scoring time. Not alarming (queue order not guaranteed)
+  but worth watching. Re-polling on every continuation tick = churn.
+- Scheduled a 2h backstop wakeup (id 4tTdwnBW8WySmViiptrbeU, wakes 2026-08-16 00:33 UTC). On wake:
+  if v4 COMPLETE & >0 → flip K5, record leaderboard, fold real number into WORKING_NOTE.md + mirror,
+  commit/push; if 0/error → log, do NOT churn variants; if still PENDING → reschedule one 2h backstop.
