@@ -1,3 +1,4 @@
+
 """AttackAlgorithm — argument-shadowed EXFILTRATION with replay-safe live fill.
 
 Scored primitive (our verified blind spot B1):
@@ -172,3 +173,4 @@ class AttackAlgorithm(AttackAlgorithmBase):
                 if MARKER in str((e.get("args") or {}).get("data", "")):
                     return True
         return False
+
