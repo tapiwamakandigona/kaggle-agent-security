@@ -1,12 +1,47 @@
 {
   "project": "kaggle-agent-security",
   "features": [
-    {"id":"K1","desc":"Entered competition (rules accepted)","passes":true,"evidence":"Join gone / Submit Prediction active, verified 2026-08-15"},
-    {"id":"K2","desc":"Competition spec captured & verified","passes":true,"evidence":"research/kaggle_spec.txt + PROJECT.md, 2026-08-15"},
-    {"id":"K3","desc":"SDK + fixtures obtained locally to code against","passes":false,"evidence":""},
-    {"id":"K4","desc":"Minimal attack.py runs in-env and returns >=1 valid candidate","passes":false,"evidence":""},
-    {"id":"K5","desc":"Archive/novelty search finds candidates across >=3 predicate families","passes":false,"evidence":""},
-    {"id":"K6","desc":"Notebook submitted; appears on leaderboard with a real score","passes":false,"evidence":""},
-    {"id":"K7","desc":"Working Note drafted (method + diversity + per-predicate findings)","passes":false,"evidence":""}
+    {
+      "id": "K1",
+      "desc": "Entered competition (rules accepted)",
+      "passes": true,
+      "evidence": "Join gone / Submit Prediction active, verified 2026-08-15"
+    },
+    {
+      "id": "K2",
+      "desc": "Competition spec captured & verified",
+      "passes": true,
+      "evidence": "research/kaggle_spec.txt + PROJECT.md, 2026-08-15"
+    },
+    {
+      "id": "K3",
+      "desc": "SDK + fixtures obtained locally to code against",
+      "passes": true,
+      "evidence": "aicomp-sdk 3.1.2 pulled from PyPI + unpacked to sdk/; interface/predicates read, 2026-08-15"
+    },
+    {
+      "id": "K4",
+      "desc": "Minimal attack.py runs in-env and returns >=1 valid candidate",
+      "passes": false,
+      "evidence": ""
+    },
+    {
+      "id": "K5",
+      "desc": "Archive/novelty search finds candidates across >=3 predicate families",
+      "passes": false,
+      "evidence": ""
+    },
+    {
+      "id": "K6",
+      "desc": "Notebook submitted; appears on leaderboard with a real score",
+      "passes": false,
+      "evidence": ""
+    },
+    {
+      "id": "K7",
+      "desc": "Working Note drafted (method + diversity + per-predicate findings)",
+      "passes": false,
+      "evidence": ""
+    }
   ]
 }
