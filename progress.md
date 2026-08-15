@@ -147,3 +147,56 @@
   => our per-candidate +2 unique-cell bonus is real; volume+diversity scaling confirmed.
 - Both submissions (v3 55532694, v4 55532857) still PENDING (rerun runs vs live models
   with large budget; slow). Wakeup scheduled to collect scores.
+
+## 2026-08-15 (iter-39) — Working Note honesty audit vs SHIPPED code (award integrity)
+- Award judges inspect the code. Audited WORKING_NOTE.md claims against submitted attack.py:
+  - attack.py v4 is PURELY argument-shadowing burst (verified: grep found NO archive/snapshot/
+    go-explore/launder/taint machinery in executable code; submission/attack.py IDENTICAL to
+    repo-root attack.py that the notebook writes).
+  - BUT the note's TITLE ("Laundered Taint ... Go-Explore"), Summary, and §5.4 claimed a
+    Go-Explore archive + laundering-seed library as if SHIPPED. That mismatch would sink the
+    Working Note Award.
+- Fixed (all now match code): retitled to "Argument Shadowing: A Minimal, Replay-Safe
+  Exfiltration Attack..."; Summary now states we REPORT 3 blind spots but EXPLOIT only #1
+  (framed as deliberate minimality-for-replay-robustness); §5.4 rewritten "diversity via unique
+  hosts (not a search)", explicitly says we did NOT ship an archive and why.
+- VERIFIED remaining launder/taint mentions are all legit ANALYSIS context (§4 deterministic
+  immunity, §8 defender taxonomy), not shipped-attack claims.
+- VERIFIED §4 "8,838 chains, 0 breaches" against evidence file bf_results.txt ("tested 8838
+  chains in 247.5s ... BREACHES: 0") + STRATEGY.md finding block — real, not aspirational.
+- Committed+pushed; root mirror synced. Note is now award-integrity-clean & the honest story is
+  actually STRONGER (minimal, fully verifiable, robust-by-design).
+
+## 2026-08-15 (iter-40) — Kaggle score check (still PENDING; leaderboard calibration gained)
+- Checked ~21:48 UTC (4.5h after v4 submit). GROUND TRUTH via CLI `kaggle competitions submissions`
+  (raw ListSubmissions API omits the status field — use the CLI, it shows it):
+    55532857 (v4) = SubmissionStatus.PENDING
+    55532694 (v3) = SubmissionStatus.PENDING
+- `kaggle kernels status` = KernelWorkerStatus.COMPLETE — that's the INTERACTIVE save completing,
+  NOT the competition rerun. Scoring queue is the bottleneck, still not posted.
+- Leaderboard calibration (public, top rows): 137.13 / 126.01 / 125.69 / 121.03 ... many entrants.
+  So a competitive score is ~100+. Metric scale is larger than the raw/200000*1000 note implied —
+  do NOT re-derive expected score speculatively; wait for the real number.
+- ACTION: none — cannot verify score until it posts. Wakeup 7arrPfTRmnNEgwCKeEmQn7 (22:30 UTC) is
+  the backstop re-check. Per standing rule: do NOT churn speculative attack variants.
+- Strategic note: Working Note Award ($2,500) is judged on writeup quality, INDEPENDENT of
+  leaderboard rank. Even a mid-board score can win it — reinforces that iter-39's working-note
+  honesty pass was the highest-value Kaggle work available while scoring is blocked.
+
+## 2026-08-15 (iter-41) — Kaggle scoring queue moving: v3 COMPLETE = 0.000, v4 still PENDING
+- Checked ~22:10 UTC. v3 (55532694, "Go-Explore + taint-laundering blind-spot v3") = COMPLETE,
+  publicScore 0.000. v4 (55532857, minimal argument-shadowing burst) = still PENDING.
+- v3 scoring exactly 0 against the hidden LLM targets is signal: the laundering/go-explore framing
+  did NOT land. This RETROACTIVELY VALIDATES iter-39's decision to ship v4 as the minimal
+  argument-shadowing attack and to strip the go-explore/laundering claims from the working note.
+- OPEN QUESTION (do not speculate — wait for v4's real number): is v3's 0 because (a) the hidden
+  agents don't comply with the injection, or (b) the guardrail on the hidden targets differs from
+  the bundled OptimalGuardrail whose blind spot v4 exploits? If v4 also = 0, root cause is
+  targets-don't-comply and local verification is impossible (bundled deterministic agent is immune).
+- Checking now whether the SDK can run v4 locally vs a real LLM target (gpt_oss/gemma) to predict.
+
+- VERIFIED (bounded probe, iter-41): local LLM prediction of v4 is IMPOSSIBLE in this sandbox.
+  `evaluate redteam attack.py --agent gpt_oss` → "Failed to load HF chat-template backend from
+  'openai/gpt-oss-20b'" (needs model weights + GPU, absent here). gemma same class. The only
+  locally-runnable agent is the deterministic one, which is PROVEN immune. => v4's real score can
+  ONLY come from Kaggle's rerun. Correct action = WAIT, do not fabricate variants.
