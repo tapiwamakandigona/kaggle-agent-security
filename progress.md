@@ -139,3 +139,11 @@
   from LLM fill). Hand-scored 5 fallback cands = 160 raw severity.
 - Pushed notebook v4, committed placeholder submission.csv, SUBMITTED v4 -> HTTP 200,
   ref 55532857. Both 55532694 (v3) and 55532857 (v4) pending. v4 is the real contender.
+
+## 2026-08-15 (iter-292) — verified cell-diversity claim (scoring rationale grounded)
+- http.post cell arg uses _bucket_url(url) which returns the host verbatim (aa.co, ab.co,
+  ...), and cell_signature also folds user_intent_hash (last 3 user msgs). VERIFIED two
+  candidates with distinct hosts produce DISTINCT cell hashes (640ac44e... vs f7c5519a...).
+  => our per-candidate +2 unique-cell bonus is real; volume+diversity scaling confirmed.
+- Both submissions (v3 55532694, v4 55532857) still PENDING (rerun runs vs live models
+  with large budget; slow). Wakeup scheduled to collect scores.
