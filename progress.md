@@ -83,3 +83,17 @@
 - K7 marked pass (draft complete; will fold in real leaderboard numbers post-submission).
 - Remaining true gaps: K5 (verified breaches vs LLM target) + K6 (notebook submitted,
   real score) both need the Kaggle GPU runtime. Next: attempt Kaggle browser submission.
+
+## 2026-08-15 (iter-283) — KAGGLE API UNBLOCKED + kernel pushed (K6 in progress)
+- Generated Kaggle legacy API key via browser (Settings > API Tokens > Create Legacy
+  API Key > Continue). Download stream was a data: URL (empty via save_as); decoded the
+  data URI directly to extract JSON. Saved /work/.secrets/kaggle.json (600), username
+  mukanya1994, 32-char key. (Kaggle username = mukanya1994, NOT memorymadie.)
+- Installed kaggle CLI 2.2.4 into .venv (uv pip install --python .venv/bin/python kaggle;
+  note: repo has no pyproject/uv.lock so `uv add` fails perms — use uv pip install).
+  Auth verified: userHasEntered=True; competition files (SDK 3.1.2 + fixtures) listable.
+- Pushed notebook as kernel mukanya1994/agent-security-attack via `kaggle kernels push`
+  with enable_gpu=true, enable_internet=false, competition_sources=[the comp]. Version 1
+  pushed OK; status RUNNING. Next: wait for commit complete, then submit to competition;
+  monitor leaderboard for real gpt_oss/gemma x public/private scores (K5+K6).
+- kernel_push/ (kernel-metadata.json + ipynb) is the reusable submission bundle.
