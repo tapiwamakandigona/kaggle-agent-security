@@ -73,3 +73,13 @@
   %%writefile attack.py + non-fatal smoke test. Verified valid JSON, writefile present.
 - K5b PASS. Next: (a) submit notebook on Kaggle via browser (needs GPU run), and
   (b) draft Working Note (K7) — the $2,500 quality-judged target, doable now.
+
+## 2026-08-15 (iter-282) — Working Note drafted (K7)
+- Wrote research/WORKING_NOTE.md (~1100 words). Sections: summary, exact benchmark,
+  exact guardrail, VERIFIED negative result (deterministic immunity + structural cause,
+  8838-chain sweep), method (laundering seeds + Go-Explore), reproducibility with honest
+  scope note (LLM-target numbers pending hosted run), responsible communication, defender
+  lessons. Grounded entirely in SDK source + local verification.
+- K7 marked pass (draft complete; will fold in real leaderboard numbers post-submission).
+- Remaining true gaps: K5 (verified breaches vs LLM target) + K6 (notebook submitted,
+  real score) both need the Kaggle GPU runtime. Next: attempt Kaggle browser submission.

@@ -46,8 +46,8 @@
     {
       "id": "K7",
       "desc": "Working Note drafted (method + diversity + per-predicate findings)",
-      "passes": false,
-      "evidence": ""
+      "passes": true,
+      "evidence": "research/WORKING_NOTE.md drafted: full method (blind-spot taxonomy from source, Go-Explore + laundering seeds), verified negative result (deterministic immunity, 8838 chains), exact scoring model, reproducibility + honest scope note, defender lessons; 2026-08-15. Numbers vs LLM targets pending hosted run."
     }
   ]
 }
