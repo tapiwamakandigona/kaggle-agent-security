@@ -32,6 +32,12 @@
       "evidence": ""
     },
     {
+      "id": "K5b",
+      "name": "Kaggle submission notebook built (writes attack.py to /kaggle/working, valid ipynb, smoke test)",
+      "passes": true,
+      "evidence": "kaggle_notebook.ipynb: valid nbformat 4.5 JSON, 3 cells, %%writefile /kaggle/working/attack.py present, non-fatal smoke test asserts AttackAlgorithm subclass; 2026-08-15"
+    },
+    {
       "id": "K6",
       "desc": "Notebook submitted; appears on leaderboard with a real score",
       "passes": false,

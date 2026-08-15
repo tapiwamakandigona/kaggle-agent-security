@@ -60,3 +60,16 @@
 - Tuned attack.py: keep ONLY predicate-triggering candidates, dedupe by chain, allow
   up to 2000 (was capped at 40 incl. non-breaching). Revalidated + budget-safe (19.1s).
 - Next: notebook packaging (K6) — needs Kaggle GPU+gpt-oss for real breach yield.
+
+## 2026-08-15 (iter-281) — Kaggle submission notebook built (K5b)
+- Confirmed submission mechanics from spec: code competition; notebook must write
+  attack.py to /kaggle/working/; evaluator auto-loads & replays. SDK wheel +
+  kaggle_evaluation/ pre-attached => internet-off at runtime is fine (no pip).
+- Real constraints: budget 9000s PER MODEL (gpt_oss then gemma), 8 hops, <=2000
+  candidates, <=32 msgs, msg <=10000 chars, seed 123. Scored gpt_oss/gemma x public/
+  private => submission.csv Id,Score rows. Our Timebox reads config.time_budget_s so
+  it adapts to the 9000s budget automatically.
+- Built kaggle_notebook.ipynb (hand-written valid JSON; no nbformat dep): md intro +
+  %%writefile attack.py + non-fatal smoke test. Verified valid JSON, writefile present.
+- K5b PASS. Next: (a) submit notebook on Kaggle via browser (needs GPU run), and
+  (b) draft Working Note (K7) — the $2,500 quality-judged target, doable now.
