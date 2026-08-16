@@ -40,6 +40,12 @@ instances without dedup and rewards unique cells, severity and diversity scale t
 from this one primitive — without any archive search or laundering chain that would add
 replay cost and overrun risk for little marginal score.
 
+**Headline result (server rerun, verified).** The shadowed-argument attack scored
+**34.385** on the hosted rerun against the live LLM targets; an otherwise-identical attack
+with the secret in a guardrail-inspected key scored **0.000**. That controlled A/B is the
+empirical isolation of argument shadowing as the causal blind spot — the mechanism is not
+merely inferred from source, it is demonstrated in the running system (Section 6).
+
 We also report a **negative result we consider a genuine contribution**: under
 `OptimalGuardrail`, the bundled `VulnerableDeterministicAgent` is *effectively immune*,
 and we explain the precise structural reason. This distinguishes guardrail strength from
@@ -198,7 +204,14 @@ are *verified locally*. End-to-end breach **counts against the GPT-OSS/Gemma tar
 require the hosted GPU runtime (the models are GGUF/llama.cpp on T4 and are not available
 locally). Those numbers come from the hosted server rerun, not from any local assertion.
 
-**Server-rerun result (verified).** The argument-shadowed `http.post` burst
+**Server-rerun result (verified).**
+
+| Variant | Secret placement | Guardrail sees it? | Public score |
+|---|---|---|---|
+| Non-shadowed (sub 55532694) | first-inspected key | yes → blocked | **0.000** |
+| Argument-shadowed (sub 55532857) | later `data` key | no → allowed | **34.385** |
+
+The argument-shadowed `http.post` burst
 (submission 55532857) returned a **normalized public score of 34.385** on the hosted
 leaderboard rerun against the live LLM targets, versus **0.000** for the earlier
 non-shadowed variant (submission 55532694). This is the empirical confirmation that the
