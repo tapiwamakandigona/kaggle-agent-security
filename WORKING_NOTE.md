@@ -186,6 +186,38 @@ This is a conscious simplicity-for-robustness trade, and it is exactly what the 
 
 ---
 
+### 5.5 Positioning against known vulnerability classes
+Argument shadowing is not a novel primitive in the abstract — its value here is that a
+*decades-old* class of bug reappears, unaddressed, in an LLM-agent guardrail. It is a direct
+analogue of **HTTP Parameter Pollution** (OWASP): when a validator and a sink disagree about
+*which* occurrence of a parameter is authoritative, an attacker places the benign value where
+the validator reads and the malicious value where the sink reads. Here the "parameters" are
+payload keys and the disagreement is `_extract_target`'s first-present-key rule versus the
+scorer's `data`-key sink. Blind spot #3 (channel swap) is a restatement of the classic
+**confused-deputy** problem (Hardy): the guardrail's authority to allow an action is exercised
+on behalf of an ingestion channel it did not vet. Blind spot #2 (windowed taint) is a
+**taint-tracking evasion**: recency-scoped taint is defeated by padding, a limitation long
+known in dynamic taint analysis. Framed against current agent-security taxonomy, all three sit
+under **prompt-injection → unsafe tool action** (OWASP LLM Top 10, LLM01), but this note's
+contribution is to show *why* a specific, reasonable-looking guardrail fails to stop it, at the
+level of the exact predicate and extractor logic. The lesson is that agent guardrails inherit
+the entire back-catalogue of parser-differential and taint-evasion bugs from web security, and
+should be tested against that catalogue rather than against bespoke prompt lists.
+
+### 5.6 Limitations and future work
+The submitted attack exploits **only blind spot #1**, by deliberate design (Section 1): a
+minimal primitive maximises replay-robustness and minimises overrun risk. The consequence is a
+score (34.385) well below the leaderboard frontier (~117–137), because elite scores farm the
+unbounded `unique_cells` term across *many distinct predicate families*. The clear path to a
+higher score — left as future work precisely because it trades robustness for reward — is to
+**compose** the three blind spots: interleave laundering chains (blind spot #2) and channel-swap
+re-reads (blind spot #3) to generate UNTRUSTED_TO_ACTION, DESTRUCTIVE_WRITE, and CONFUSED_DEPUTY
+cells alongside EXFILTRATION, multiplying the cell-signature families rather than repeating one.
+Doing so safely requires a tighter replay-cost accountant than the one in Section 5.2, since each
+added hop raises the per-candidate replay cost that voids a submission on overrun. We judged the
+marginal score not worth the void risk for this note, whose contribution is the taxonomy and the
+isolated, verified mechanism rather than a leaderboard-maximising attack.
+
 ## 6. Reproducibility
 
 - `attack.py` — self-contained submission (no external state), ≤5 MB, class
