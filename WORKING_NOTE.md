@@ -196,7 +196,19 @@ This is a conscious simplicity-for-robustness trade, and it is exactly what the 
 **Honest scope note.** The deterministic-agent immunity and the budget/pipeline results
 are *verified locally*. End-to-end breach **counts against the GPT-OSS/Gemma targets**
 require the hosted GPU runtime (the models are GGUF/llama.cpp on T4 and are not available
-locally); those numbers are reported from the leaderboard run, not asserted here.
+locally). Those numbers come from the hosted server rerun, not from any local assertion.
+
+**Server-rerun result (verified).** The argument-shadowed `http.post` burst
+(submission 55532857) returned a **normalized public score of 34.385** on the hosted
+leaderboard rerun against the live LLM targets, versus **0.000** for the earlier
+non-shadowed variant (submission 55532694). This is the empirical confirmation that the
+blind spot is real *in the running system*, not merely in the SDK source: the identical
+payload placed in a shadowed argument key exfiltrates where the plain form is caught. The
+score is well below the leaderboard frontier (~117–137), which is expected — a single
+minimal primitive fired in a burst is a *proof of the blind spot*, not a maximized attack;
+elite scores additionally farm the unbounded `unique_cells` term across many trace cells.
+The contribution of this note is the taxonomy and the mechanism, and 34.385 vs 0.000 is
+the controlled A/B that isolates argument shadowing as the cause.
 
 ---
 

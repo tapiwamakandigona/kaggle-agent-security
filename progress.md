@@ -208,3 +208,12 @@
 - Scheduled a 2h backstop wakeup (id 4tTdwnBW8WySmViiptrbeU, wakes 2026-08-16 00:33 UTC). On wake:
   if v4 COMPLETE & >0 → flip K5, record leaderboard, fold real number into WORKING_NOTE.md + mirror,
   commit/push; if 0/error → log, do NOT churn variants; if still PENDING → reschedule one 2h backstop.
+
+## 2026-08-16 06:51 CAT — v4 SCORED (VERIFIED, money-front milestone)
+- Submission 55532857 (v4, argument-shadowing http.post burst): status=complete, publicScore=**34.385**.
+- v3 (55532694)=0.000 for contrast. Confirmed via raw CompetitionApiService submissions list (CLI hung on network; raw curl -u worked, timeout 25s).
+- ACTION: flipped features.json K5 -> passes:true with evidence; all K1-K7 now PASS.
+- Folded real server score into WORKING_NOTE.md "Server-rerun result (verified)" para: 34.385 vs 0.000 = controlled A/B isolating argument shadowing. Framed honestly (below frontier ~117-137; minimal primitive = proof-of-blind-spot not maximized attack).
+- Mirrored research/WORKING_NOTE.md -> WORKING_NOTE.md.
+- STANDING: primary target remains Working Note Award ($2,500), judged on writeup quality independent of leaderboard. Non-zero score strengthens credibility (empirical A/B, not just source reading).
+- Next: working note is now airtight WITH real evidence. Do NOT churn attack variants (5 subs/day, server-gated, marginal). Final submission deadline Sept 1 23:59; working note Sept 8.
